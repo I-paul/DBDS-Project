@@ -15,7 +15,6 @@ function App() {
   });
   const [editingId, setEditingId] = useState(null);
 
-  // Fetch patients on component mount
   useEffect(() => {
     fetchPatients();
   }, []);
@@ -92,7 +91,7 @@ function App() {
     setFormData({
       firstName: patient.firstName,
       lastName: patient.lastName,
-      dateOfBirth: patient.dateOfBirth.split('T')[0], // Format date for input
+      dateOfBirth: patient.dateOfBirth.split('T')[0], 
       gender: patient.gender,
       phoneNumber: patient.phoneNumber,
       email: patient.email,

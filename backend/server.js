@@ -23,12 +23,10 @@ db.connect(err => {
     console.log("MySQL connected successfully");
 });
 
-// Root route
 app.get('/', (req, res) => {
     return res.json("DONE");
 });
 
-// GET all patients
 app.get('/patient', (req, res) => {
     const sql = "SELECT * FROM patient";
     db.query(sql, (err, data) => {
@@ -37,7 +35,6 @@ app.get('/patient', (req, res) => {
     });
 });
 
-// GET single patient by ID
 app.get('/patient/:id', (req, res) => {
     const patientId = req.params.id;
     const sql = "SELECT * FROM patient WHERE id = ?";
@@ -49,11 +46,9 @@ app.get('/patient/:id', (req, res) => {
     });
 });
 
-// CREATE new patient
 app.post('/patient', (req, res) => {
     const { firstName, lastName, dateOfBirth, gender, phoneNumber, email, address } = req.body;
     
-    // Validate required fields
     if (!firstName || !lastName || !dateOfBirth || !gender || !phoneNumber || !email || !address) {
         return res.status(400).json({ message: "All fields are required" });
     }
@@ -86,7 +81,6 @@ app.put('/patient/:id', (req, res) => {
     const patientId = req.params.id;
     const { firstName, lastName, dateOfBirth, gender, phoneNumber, email, address } = req.body;
     
-    // Validate required fields
     if (!firstName || !lastName || !dateOfBirth || !gender || !phoneNumber || !email || !address) {
         return res.status(400).json({ message: "All fields are required" });
     }
@@ -119,7 +113,7 @@ app.put('/patient/:id', (req, res) => {
     });
 });
 
-// DELETE patient
+
 app.delete('/patient/:id', (req, res) => {
     const patientId = req.params.id;
     const sql = "DELETE FROM patient WHERE id = ?";
